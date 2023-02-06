@@ -1,0 +1,34 @@
+services:
+  website:
+    container_name: my-drupal-website
+    image: drupal:9.3.13
+    networks:
+      - myWebsite
+    ports:
+      - 8080:80
+    volumes:
+      - drupalModules:/var/www/html/modules
+      - drupalProfiles:/var/www/html/profiles
+      - drupalSites:/var/www/html/sites
+      - drupalThemes:/var/www/html/themes
+    environment:
+      - name=value
+  
+  database:
+    container_name: my-drupal-database
+    image: postgres:14.3
+    networks:
+      - myWebsite
+    environment:
+      - POSTGRES_DB=drupal
+      - POSTGRES_USER=drupal-user
+      - POSTGRES_PASSWORD=drupalpass
+
+networks:
+  myWebsite:
+
+volumes:
+  drupalModules:
+  drupalProfiles:
+  drupalSites:
+  drupalThemes:
