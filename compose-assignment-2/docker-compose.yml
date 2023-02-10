@@ -1,1 +1,38 @@
-# create your drupal and postgres config here, based off the last assignment
+services:
+  website:
+    container_name: my-custom-drupal-website
+    build: .
+    image: custom-drupal
+    networks:
+      - myWebsite
+    ports:
+      - 8080:80
+    volumes:
+      - drupalModules:/var/www/html/modules
+      - drupalProfiles:/var/www/html/profiles
+      - drupalSites:/var/www/html/sites
+      - drupalThemes:/var/www/html/themes
+    environment:
+      - name=value
+  
+  database:
+    container_name: my-custom-drupal-database
+    image: postgres:14.3
+    networks:
+      - myWebsite
+    environment:
+      - POSTGRES_DB=drupal
+      - POSTGRES_USER=drupal-user
+      - POSTGRES_PASSWORD=drupalpass
+    volumes:
+      - drupal-data:/var/lib/postgresql/data
+
+networks:
+  myWebsite:
+
+volumes:
+  drupalModules:
+  drupalProfiles:
+  drupalSites:
+  drupalThemes:
+  drupal-data:
