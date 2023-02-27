@@ -30,3 +30,7 @@ volumes:
   drupal-profiles:
   drupal-sites:
   drupal-themes:
+
+secrets:
+  postgres_password:
+    name: postgres_password
