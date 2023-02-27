@@ -33,4 +33,4 @@ volumes:
 
 secrets:
   postgres_password:
-    name: postgres_password
+    external: true
