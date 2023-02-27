@@ -17,12 +17,12 @@ services:
  
   postgres:
     image: postgres:14.3
+    secrets:
+      - postgres_password
     environment:
       - POSTGRES_PASSWORD_FILE=/run/secrets/postgres_password
     volumes:
       - drupal-data:/var/lib/postgresql/data
-    secrets:
-      - postgres_password
 
 volumes:
   drupal-data:
